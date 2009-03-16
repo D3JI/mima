@@ -1,0 +1,27 @@
+<h1>Albums#index</h1>
+<p>Find me in app/views/albums/index.html.erb</p>
+<div id="l_pic" class="modbox">
+  <div id="notice">共 <%= @user.albums_count %> 个相册共 <%= @user.photos_count %> 张图片。
+    <% if @user == logged_in_user %>
+      <%= link_to '创建相册', new_user_album_path(:user_id => @user.id) %></div>
+  <% end %>
+  <% @albums.each do |album|%>
+    <ul>
+      <li>
+      <% if album.primary%>
+        <p class="photo"><%= link_to image_tag(album.primary.public_filename(:thumb))%> </p>
+      <% end %>
+      <p><%=link_to album.name, user_album_photos_path(:album_id => album.id) %><br>
+      <strong>(<%= album.photos_count %>)</strong><br>
+      </p>
+      <% if logged_in_user == @user %>
+        <p><%= link_to '编辑', edit_user_album_path(:id => album.id) %> 
+        | <%= link_to '删除', user_album_path(:id => album.id), :method => :delete, :confirm => "Do you sure??" %>
+        |<%= link_to '上传照片', new_user_album_photo_path(:user_id => album.user, :album_id => album)%></p>
+      <% end %>
+      </li>
+    </ul>
+  <% end %>
+</div>
+<div class="clear"></div>
+    </div>

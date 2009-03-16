@@ -1,0 +1,22 @@
+<h1>Photos#index</h1>
+<p>Find me in app/views/photos/index.html.erb</p>
+<div id="l_pic2" class="modbox">
+  <div id="pictitle"><h1><%= @album.name %></h1></div>
+  <div id="notice"><strong>相册介绍：</strong><%= @album.description %><br>
+  </div>
+  <ul>
+    <% @photos.each do |photo|%>
+      <li id="liphoto_33046">
+      <p class="photo"><%= link_to image_tag(photo.public_filename(:thumb)), user_album_photo_path(:id => photo.id)%></p>
+      <p><%= link_to photo.title , user_album_photo_path(:id => photo.id)%><font>浏览:() | 评论:0</font></p>
+      <% if logged_in_user == photo.user %>
+        <p><%= link_to '编辑', edit_user_album_photo_path(:id => photo.id) %>|
+        <%= link_to '删除', user_album_photo_path(:id => photo.id), :method => :delete, :confirm => '您确认要删除这张照片?'%>
+        | <%= link_to '设为封皮', set_primary_user_album_photo_path(:id => photo.id), :method => :put  %>
+        | <%= link_to '设为头像', set_avatar_user_album_photo_path(:id => photo.id), :method => :put  %></p> </li>
+      <% end %>
+    <% end %>
+  </ul>
+</div>
+<div class="clear"></div>
+    </div>

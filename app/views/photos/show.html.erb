@@ -1,0 +1,17 @@
+<h1>Photos#show</h1>
+<p>Find me in app/views/photos/show.html.erb</p>
+<div class="modbox">
+  <div id="photoinner">
+    <%= image_tag(@photo.public_filename())%>
+    <h3><%= @photo.title %><br>
+    </h3>
+    <div id="photoabout"><strong>大小： </strong><%= @photo.height %>*<%= @photo.width %> <%= @photo.size %>
+      | <strong>上传时间：</strong><%= @photo.created_at %> |  <strong>访问：</strong> 15 次</div>
+  </div>
+  <div id="notice"><strong>照片简介</strong>：<%= @photo.description %><br>
+    <strong>标签</strong>：我。。</div>
+  <div class="pnext">
+    <p class="pa"><a href="space_photo.php?id=33033">上一张</a></p>
+    <p class="pb">当前第<strong>3</strong>张</p>
+    <p class="pc"></p>
+  </div>

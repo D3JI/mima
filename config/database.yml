@@ -17,10 +17,10 @@
 development:
   adapter: mysql
   encoding: utf8
-  database: mimimama_development
+  database: mima
   pool: 5
   username: root
-  password:
+  password: 123
   socket: /tmp/mysql.sock
 
 # Warning: The database defined as "test" will be erased and

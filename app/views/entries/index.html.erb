@@ -1,0 +1,27 @@
+<h1>Entries#index</h1>
+<p>Find me in app/views/entries/index.html.erb</p>
+<div class="modbox" id="l_blog">
+  <div id="notice">共<%= @user.entries_count %>篇文章</div>
+  <ul id="blog_post_25598">
+    <% @entries.each do |entry|%>
+      <li class="ctitle">
+      <%= link_to entry.title, user_entry_path(:id => entry) %>
+      <% if logged_in_user == @user %>
+        <%= link_to 'edit', edit_user_entry_path(:id => entry)%> 
+        | <%= link_to 'delete', user_entry_path(:id => entry), :method => :delete, :confirm => '确认要删除这篇文章?' %>
+      <% end %>
+      </li>
+      <li class="ctime"><%= entry.created_at %></li>
+      <li class="bcon"><%= entry.content %></li>
+      <% if entry.entry_category %>
+        <p class="cmore">类别：
+        <%= link_to entry.entry_category.name %>
+      <% end %>
+      <!-- display_user_entry_path(:user_id => entry.user_id, :category_id => entry.entry_category_id), :method => :put--> 
+      | 浏览 |  评论()</p>
+      </li>
+    <% end %>
+  </ul>
+  <div class="clear"></div>
+</div>
+
