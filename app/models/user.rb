@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
   has_many :albums, :dependent => :destroy
   has_many :entries, :dependent => :destroy
-  has_one :avatar, :class_name => "Photo", :conditions => ["photo.avatar = ?", 1]
+  has_many :photos, :dependent => :destroy
+  has_one :avatar, :class_name => 'Photo', :conditions => ["photos.avatar = ?", 1]
   validates_presence_of :username, :email, :nike
   validates_length_of :username,:within => 3..10
   validates_length_of :nike, :within => 3..10

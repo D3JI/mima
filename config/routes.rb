@@ -1,8 +1,12 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :users do |user|
-    user.resources :entries
+    user.resources :entries do |entry|
+      entry.resources :comments
+    end
     user.resources :albums do |album|
-      album.resources :photos, :member => {:set_primary => :put, :set_avatar => :put }
+      album.resources :photos, :member => {:set_primary => :put, :set_avatar => :put } do |photo|
+        photo.resources :comments
+      end
     end
   end
   map.login '/login', :controller => 'account', :action => 'login'

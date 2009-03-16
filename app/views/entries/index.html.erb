@@ -11,7 +11,7 @@
         | <%= link_to 'delete', user_entry_path(:id => entry), :method => :delete, :confirm => '确认要删除这篇文章?' %>
       <% end %>
       </li>
-      <li class="ctime"><%= entry.created_at %></li>
+      <li class="ctime"><%= entry.created_at.strftime("%y-%m-%d %H-%m") %></li>
       <li class="bcon"><%= entry.content %></li>
       <% if entry.entry_category %>
         <p class="cmore">类别：

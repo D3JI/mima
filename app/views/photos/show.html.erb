@@ -2,16 +2,45 @@
 <p>Find me in app/views/photos/show.html.erb</p>
 <div class="modbox">
   <div id="photoinner">
-    <%= image_tag(@photo.public_filename())%>
+    <%= image_tag(@photo.public_filename(:tiny))%>
     <h3><%= @photo.title %><br>
     </h3>
-    <div id="photoabout"><strong>大小： </strong><%= @photo.height %>*<%= @photo.width %> <%= @photo.size %>
-      | <strong>上传时间：</strong><%= @photo.created_at %> |  <strong>访问：</strong> 15 次</div>
+    <div id="photoabout">
+      <strong>大小： </strong><%= @photo.height %>*<%= @photo.width %> <%= Float(@photo.size)/1024%>Kb
+      | <strong>上传时间：</strong><%= @photo.created_at.strftime("%Y-%m-%d %H-%m") %> 
+      |  <strong>访问：</strong> 15 次</div>
   </div>
   <div id="notice"><strong>照片简介</strong>：<%= @photo.description %><br>
     <strong>标签</strong>：我。。</div>
-  <div class="pnext">
-    <p class="pa"><a href="space_photo.php?id=33033">上一张</a></p>
-    <p class="pb">当前第<strong>3</strong>张</p>
-    <p class="pc"></p>
+  <div id="review">
+    <div>
+      <% @comments.each do |comment|%>
+        <ul>
+          <li class="r_img"><%= image_tag(comment.user.avatar.public_filename(:tiny))%></li>
+          <li class="user"><%= link_to comment.user.username %> [<%= comment.created_at.strftime("%y-%m-%d %H-%m") %>]
+          <% if logged_in_user == @photo.user %>
+            [<span style="color: rgb(153, 153, 153); cursor: pointer;">
+              <%= link_to '删除' , user_album_photo_comment_path(:photo_id => @photo, :id => comment.id), :method => :delete, :confirm => "Do you sure to delete?"%>
+            </span>]
+          <% end %></li>
+          <!--<%= link_to '弹出新窗口',home_path,:popup => ['new_window_name', 'height=300,width=600'] %>-->
+          <li class="rcon"><%= comment.content %></li><li class="clear">&nbsp;</li>
+        </ul>
+      <% end %>
+    </div>
   </div>
+  <% form_for :comment, :url => user_album_photo_comments_path(:photo_id => @photo.id) do |f|%>
+    <ul id="addreview">
+      <li class="addtitle">添加评论</li>
+      <li>已登录:<%= logged_in_user.username %></li>
+      <li>
+      <%= f.text_area :content, :rows => 10, :cols => 30%>
+      </li> 
+      <li>
+      <%= submit_tag '提交评论', :class => 'button' %>
+      <input name="switch" id="logid" value="photo" type="hidden">
+      </li> 
+    </ul>
+  <% end %>
+  <div class="clear"></div>
+</div>

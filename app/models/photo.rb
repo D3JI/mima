@@ -1,5 +1,6 @@
 require 'RMagick'
 class Photo < ActiveRecord::Base
+  has_many :comments, :dependent => :destroy
   belongs_to :album, :counter_cache => true
   belongs_to :user, :counter_cache => true
   has_attachment :storage => :file_system,

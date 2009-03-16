@@ -23,7 +23,9 @@ class EntriesController < ApplicationController
   end
 
   def show
+    #@user = User.find(params[:user_id])
     @entry = Entry.find(params[:id])
+    @comments = @entry.comments.find(:all, :order => 'created_at DESC')
   end
 
   def edit

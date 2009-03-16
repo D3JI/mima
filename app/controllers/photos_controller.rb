@@ -24,6 +24,7 @@ class PhotosController < ApplicationController
 
   def show
     @photo = Photo.find(params[:id])
+    @comments = @photo.comments.find(:all, :order => 'created_at desc')
   end
 
   def edit
