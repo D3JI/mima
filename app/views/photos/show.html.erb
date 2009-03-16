@@ -6,7 +6,7 @@
     <h3><%= @photo.title %><br>
     </h3>
     <div id="photoabout">
-      <strong>大小： </strong><%= @photo.height %>*<%= @photo.width %> <%= Float(@photo.size)/1024%>Kb
+      <strong>大小： </strong><%= @photo.height %>*<%= @photo.width %> <%= Float(@photo.size)/1024 %> Kb
       | <strong>上传时间：</strong><%= @photo.created_at.strftime("%Y-%m-%d %H-%m") %> 
       |  <strong>访问：</strong> 15 次</div>
   </div>
